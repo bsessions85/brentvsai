@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Your Niche | BrentVsAI</title>
+  <meta name="description" content="Answer 5 questions and get a ranked list of niches matched to your interests, skills, and goals.">
+  <meta property="og:title" content="Find Your Niche — Free Quiz">
+  <meta property="og:description" content="5 questions. Instant results. Find the niche that fits your life.">
+  <meta property="og:url" content="https://brentvsai.com/quiz/niche">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0e0e0e;
+      --surface: #161616;
+      --surface2:#1e1e1e;
+      --border:  #2a2a2a;
+      --border2: #3a3a3a;
+      --text:    #e8e6e0;
+      --muted:   #6b6b6b;
+      --accent:  #e8c468;
+      --accent2: #4a9eff;
+      --big3:    rgba(232,196,104,0.07);
+      --big3b:   rgba(232,196,104,0.35);
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── TOP NAV ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .topbar-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── SCREENS ── */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* ── INTRO ── */
+    .intro-wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    .intro-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .intro-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:.3; transform:scale(.7); }
+    }
+
+    .intro-h1 {
+      font-family: var(--mono);
+      font-size: clamp(26px, 5vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+
+    .intro-h1 em { color: var(--accent); font-style: normal; }
+
+    .intro-body {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .intro-body strong { color: var(--text); font-weight: 500; }
+
+    .intro-meta {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .meta-item {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-item span { color: var(--accent); }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #0e0e0e;
+      border: none;
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity .15s, transform .1s;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 13px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover { border-color: var(--muted); background: var(--surface); }
+
+    /* ── QUIZ ── */
+    .quiz-wrap {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    .progress-bar-wrap {
+      margin-bottom: 2.5rem;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .progress-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .progress-count {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .progress-track {
+      height: 2px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width .4s ease;
+    }
+
+    .question-block { animation: fadeUp .3s ease both; }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(10px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .q-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: .75rem;
+    }
+
+    .q-text {
+      font-family: var(--mono);
+      font-size: clamp(17px, 3vw, 22px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: .5rem;
+    }
+
+    .q-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+      line-height: 1.6;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 2rem;
+    }
+
+    .options-grid.cols-1 { grid-template-columns: 1fr; }
+    .options-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+    @media (max-width: 480px) {
+      .options-grid, .options-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .15s, background .15s, transform .1s;
+      line-height: 1.4;
+    }
+
+    .option-btn:hover { border-color: var(--border2); background: var(--surface2); }
+
+    .option-btn.selected {
+      border-color: var(--accent);
+      background: rgba(232,196,104,.07);
+      color: var(--accent);
+    }
+
+    .option-check {
+      width: 18px; height: 18px;
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .15s, background .15s;
+    }
+
+    .option-btn.selected .option-check {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #0e0e0e;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .q-note {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-ghost {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      cursor: pointer;
+      padding: 8px 0;
+      transition: color .15s;
+    }
+
+    .btn-ghost:hover { color: var(--text); }
+
+    /* ── RESULTS ── */
+    .results-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+
+    .results-header { margin-bottom: 2.5rem; }
+
+    .results-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: .75rem;
+    }
+
+    .results-h1 {
+      font-family: var(--mono);
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: .75rem;
+    }
+
+    .results-h1 em { color: var(--accent); font-style: normal; }
+
+    .results-sub {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .results-sub strong { color: var(--text); font-weight: 500; }
+
+    .section-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* niche card */
+    .niche-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color .15s;
+    }
+
+    .niche-card:hover { border-color: var(--border2); }
+
+    .niche-card.big3 {
+      border-color: var(--big3b);
+      background: var(--big3);
+    }
+
+    .niche-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      cursor: pointer;
+      gap: 12px;
+    }
+
+    .niche-card-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .niche-rank {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      min-width: 24px;
+      flex-shrink: 0;
+    }
+
+    .niche-card.big3 .niche-rank { color: var(--accent); }
+
+    .niche-badge {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .niche-info { min-width: 0; }
+
+    .niche-name {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .niche-card.big3 .niche-name { color: var(--accent); }
+
+    .niche-tagline {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .niche-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .niche-score-bar {
+      width: 60px;
+      height: 3px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .niche-score-fill {
+      height: 100%;
+      background: var(--muted);
+      border-radius: 3px;
+      transition: width .4s ease;
+    }
+
+    .niche-card.big3 .niche-score-fill { background: var(--accent); }
+
+    .niche-score-pct {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      min-width: 30px;
+      text-align: right;
+    }
+
+    .niche-card.big3 .niche-score-pct { color: var(--accent); }
+
+    .niche-chevron {
+      font-size: 12px;
+      color: var(--muted);
+      transition: transform .25s ease;
+    }
+
+    .niche-card.open .niche-chevron { transform: rotate(180deg); }
+
+    .niche-detail {
+      display: none;
+      padding: 0 16px 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .niche-card.big3 .niche-detail { border-top-color: var(--big3b); }
+    .niche-card.open .niche-detail { display: block; }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 520px) { .detail-grid { grid-template-columns: 1fr; } }
+
+    .detail-section { }
+
+    .detail-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+    }
+
+    .detail-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .detail-list li {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .detail-list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    .detail-content {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .detail-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .tag-pill {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 8px;
+      letter-spacing: 0.04em;
+    }
+
+    .niche-card.big3 .tag-pill { border-color: var(--big3b); color: var(--accent); }
+
+    /* ── CTA ── */
+    .cta-block {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .cta-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: .75rem;
+    }
+
+    .cta-h2 {
+      font-family: var(--mono);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: .75rem;
+    }
+
+    .cta-h2 em { color: var(--accent); font-style: normal; }
+
+    .cta-body {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+    }
+
+    .cta-body strong { color: var(--text); font-weight: 500; }
+
+    .cta-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    @media (min-width: 480px) { .cta-buttons { flex-direction: row; } }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    .retake-row {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="topbar-logo" href="/">@brentvsai</a>
+    <span class="topbar-label">// find your niche</span>
+  </div>
+
+  <!-- ─────────────────────────────── INTRO ─── -->
+  <div id="screen-intro" class="screen active">
+    <div class="intro-wrap">
+      <div class="intro-tag">free tool</div>
+      <h1 class="intro-h1">Find your <em>niche</em>.<br>Stop guessing.</h1>
+      <p class="intro-body">
+        Answer <strong>5 questions</strong>. Get a ranked list of niches matched to your interests, goals, and how you want to work.<br><br>
+        Every result includes content direction, affiliate opportunities, and digital product ideas you can start on today.
+      </p>
+      <div class="intro-meta">
+        <div class="meta-item"><span>5</span> questions</div>
+        <div class="meta-item"><span>2</span> minutes</div>
+        <div class="meta-item"><span>40+</span> niches</div>
+      </div>
+      <button class="btn-primary" onclick="startQuiz()">Start the quiz →</button>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────── QUIZ ─── -->
+  <div id="screen-quiz" class="screen">
+    <div class="quiz-wrap">
+      <div class="progress-bar-wrap">
+        <div class="progress-meta">
+          <span class="progress-label">// progress</span>
+          <span class="progress-count" id="progress-count">1 of 5</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill" style="width:20%"></div>
+        </div>
+      </div>
+      <div id="question-container"></div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────── RESULTS ─── -->
+  <div id="screen-results" class="screen">
+    <div class="results-wrap">
+      <div class="results-header">
+        <div class="results-tag">// your results</div>
+        <h2 class="results-h1">Here are your <em>matched niches</em>.</h2>
+        <p class="results-sub">
+          The <strong>Big 3</strong> (health, wealth, relationships) are highlighted at the top - they have the largest audiences and highest earning potential. Everything below is ranked by how well it fits your answers.
+        </p>
+      </div>
+
+      <div class="section-title">// the big 3 — always strong</div>
+      <div id="results-big3"></div>
+
+      <div class="divider"></div>
+
+      <div class="section-title">// your ranked matches</div>
+      <div id="results-other"></div>
+
+      <div class="cta-block">
+        <div class="cta-label">// what's next</div>
+        <h3 class="cta-h2">You've got the niche.<br>Now <em>build the business.</em></h3>
+        <p class="cta-body">
+          Knowing your niche is step one. Step two is building content, finding affiliate offers, and creating products people actually buy.<br><br>
+          I'm documenting exactly how I do all of that - from <strong>zero followers and zero dollars</strong> - in real time. You can watch, steal the strategy, and ask questions.
+        </p>
+        <div class="cta-buttons">
+          <a class="btn-primary" href="/free" target="_blank">Join the free community →</a>
+          <a class="btn-secondary" href="https://www.skool.com/brent-vs-ai-1732" target="_blank">See the $497 course</a>
+        </div>
+      </div>
+
+      <div class="retake-row">
+        <button class="btn-ghost" onclick="retakeQuiz()">← retake the quiz</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* ════════════════════════════════════════════════════════
+   QUESTIONS
+════════════════════════════════════════════════════════ */
+const QUESTIONS = [
+  {
+    id: 'topic',
+    text: "What gets you fired up?",
+    sub: "Pick everything that genuinely interests you - not what you think should.",
+    multi: true,
+    cols: 2,
+    options: [
+      { label: "Making or saving money",        tags: ['wealth','finance','investing','frugal'] },
+      { label: "Health, fitness, or feeling better", tags: ['health','fitness','nutrition','wellness','mentalhealth'] },
+      { label: "Relationships and connection",  tags: ['relationships','dating','marriage','parenting','social'] },
+      { label: "Travel and exploring places",   tags: ['travel','travelb2c','travelb2b'] },
+      { label: "Food and cooking",              tags: ['food','cooking'] },
+      { label: "Tech, gadgets, or AI",          tags: ['tech','ai','saas'] },
+      { label: "Pets and animals",              tags: ['pets'] },
+      { label: "Home, DIY, or design",          tags: ['home','diy','interiordesign'] },
+      { label: "Hobbies and outdoor activities",tags: ['outdoors','hobbies','gaming','crafts','sports'] },
+      { label: "Faith, purpose, or self-growth",tags: ['faith','personaldevelopment','mindset'] },
+      { label: "Business, marketing, or sales", tags: ['bizops','marketing','ecommerce','freelance'] },
+      { label: "Education or helping others learn", tags: ['education','tutoring','parenting'] },
+    ],
+  },
+  {
+    id: 'angle',
+    text: "Who do you want to help?",
+    sub: "This shapes whether you go consumer-facing (B2C) or business-facing (B2B).",
+    multi: false,
+    cols: 1,
+    options: [
+      { label: "Regular people looking to improve their lives",         tags: ['b2c'] },
+      { label: "Small business owners or entrepreneurs",                tags: ['b2b','smb'] },
+      { label: "Other content creators or online marketers",            tags: ['b2b','marketing','creator'] },
+      { label: "Professionals in a specific industry",                  tags: ['b2b','professional'] },
+      { label: "Both - I like the idea of either",                     tags: ['b2c','b2b'] },
+    ],
+  },
+  {
+    id: 'style',
+    text: "How do you want to show up?",
+    sub: "Be honest - you don't have to want to be on camera.",
+    multi: false,
+    cols: 2,
+    options: [
+      { label: "On camera — I'm comfortable being the face", tags: ['video','facecam'] },
+      { label: "Behind the camera — tutorials, screen recording", tags: ['video','screencast'] },
+      { label: "Writing — blogs, newsletters, threads",           tags: ['writing'] },
+      { label: "Audio — podcasts, voice-over",                   tags: ['audio'] },
+      { label: "I don't know yet, I'm open to anything",         tags: ['video','writing','audio'] },
+    ],
+  },
+  {
+    id: 'monetize',
+    text: "How do you want to make money?",
+    sub: "Pick your preferred income model — or all of them.",
+    multi: true,
+    cols: 2,
+    options: [
+      { label: "Affiliate commissions — promote other people's products", tags: ['affiliate'] },
+      { label: "Digital products — courses, templates, ebooks",          tags: ['digitalproducts'] },
+      { label: "Services or freelancing — do the work for clients",      tags: ['services','freelance'] },
+      { label: "Physical products or ecommerce",                         tags: ['ecommerce','physical'] },
+      { label: "Ads and sponsorships — build an audience first",         tags: ['audience','ads'] },
+      { label: "Coaching or consulting",                                 tags: ['coaching','b2b'] },
+    ],
+  },
+  {
+    id: 'time',
+    text: "How much time can you realistically put in?",
+    sub: "Per week, outside of your regular job or life.",
+    multi: false,
+    cols: 1,
+    options: [
+      { label: "Less than 5 hours — I need something lean",         tags: ['loweffort'] },
+      { label: "5–15 hours — steady side hustle energy",            tags: ['medium'] },
+      { label: "15–30 hours — I'm serious about making this work",  tags: ['highenergy'] },
+      { label: "All in — I'm treating this like a real business",   tags: ['allin'] },
+    ],
+  },
+];
+
+/* ════════════════════════════════════════════════════════
+   NICHE DATABASE
+   Each niche has:
+   - id, name, emoji, tagline, big3 (bool)
+   - tags[] — scored against user's tag selections
+   - content: description of content direction + community
+   - affiliates: []
+   - products: []
+════════════════════════════════════════════════════════ */
+const NICHES = [
+  /* ── BIG 3 ── */
+  {
+    id:'wealth', name:'Make Money Online / Digital Marketing', emoji:'💰',
+    tagline:'Teach the wealth-building path you are already walking',
+    big3: true,
+    tags:['wealth','finance','marketing','b2c','b2b','digitalproducts','affiliate','video','audience','allin','highenergy','creator'],
+    content:'Document your journey building income online. Tutorial content, income updates, tool breakdowns, AI workflows. Community of people who want to escape the 9-5 or add a side income.',
+    affiliates:['ClickFunnels','Skool','Kit (ConvertKit)','Systeme.io','Canva Pro','Stan Store','Teachable','ThriveCart'],
+    products:['Digital marketing course (your exact path)','Content creation toolkit','Email templates swipe file','Niche research framework','90-day challenge planner'],
+  },
+  {
+    id:'health', name:'Health, Fitness & Weight Loss', emoji:'💪',
+    tagline:'One of the largest and most evergreen markets online',
+    big3: true,
+    tags:['health','fitness','nutrition','wellness','b2c','affiliate','video','facecam','digitalproducts','audience'],
+    content:'Transformation content, workout tutorials, nutrition guides, mental health check-ins. Community for people starting (or restarting) a health journey.',
+    affiliates:['MyFitnessPal','Thrive Market','Athletic Greens (AG1)','Gainful','Whoop','Precision Nutrition'],
+    products:['12-week workout plan','Meal prep guide + recipes','Habit tracker (Notion or PDF)','Mindset for weight loss mini-course','Home gym setup guide'],
+  },
+  {
+    id:'relationships', name:'Relationships & Personal Connection', emoji:'❤️',
+    tagline:'Dating, marriage, parenting, social skills — massive and personal',
+    big3: true,
+    tags:['relationships','dating','marriage','parenting','social','b2c','video','writing','audience','digitalproducts'],
+    content:'Real talk content about dating, communication, marriage, parenting, or building social confidence. Community for people wanting deeper connections.',
+    affiliates:['Gottman Institute resources','BetterHelp (therapy referral)','Relish (couples app)','Lasting app','Love Languages products'],
+    products:['Relationship communication guide','Date night idea book','Parenting framework course','Social confidence blueprint','Couples check-in journal (digital)'],
+  },
+
+  /* ── WEALTH / BUSINESS ── */
+  {
+    id:'personalfinance', name:'Personal Finance & Budgeting', emoji:'📊',
+    tagline:'Help people stop being broke — huge audience, real pain point',
+    big3: false,
+    tags:['wealth','finance','frugal','b2c','writing','video','affiliate','digitalproducts','loweffort','medium'],
+    content:'Budgeting tutorials, debt payoff strategies, savings challenges, investing for beginners. Community for people getting serious about money for the first time.',
+    affiliates:['Mint / YNAB','Credit Karma','Acorns','Webull / Robinhood','CIT Bank','NerdWallet'],
+    products:['Budget spreadsheet template','Debt snowball tracker','Beginner investing guide','Financial freedom roadmap','No-spend challenge kit'],
+  },
+  {
+    id:'investing', name:'Investing & Building Wealth', emoji:'📈',
+    tagline:'Stocks, index funds, real estate — long-term money content',
+    big3: false,
+    tags:['wealth','finance','investing','b2c','writing','video','affiliate','audience','medium','highenergy'],
+    content:'Investment strategy breakdowns, portfolio updates, book reviews, beginner to intermediate content. Community for people building long-term wealth.',
+    affiliates:['Seeking Alpha','Motley Fool','M1 Finance','Fundrise (real estate)','Personal Capital','Betterment'],
+    products:['Investing starter guide','Portfolio tracking spreadsheet','Real estate investment primer','Dividend income playbook','Wealth-building roadmap'],
+  },
+  {
+    id:'freelance', name:'Freelancing & Remote Work', emoji:'💻',
+    tagline:'Show people how to sell their skills and ditch the office',
+    big3: false,
+    tags:['freelance','services','b2c','b2b','writing','video','digitalproducts','coaching','medium','highenergy'],
+    content:'How to land clients, set rates, build a portfolio, escape the 9-5. Community for freelancers and people building remote income.',
+    affiliates:['Fiverr','Upwork','Bonsai (contracts)','HoneyBook','Notion','Loom'],
+    products:['Freelance pitch template pack','Client onboarding kit','Rate-setting calculator','Cold email playbook','Freelance to agency roadmap'],
+  },
+  {
+    id:'ecommerce', name:'Ecommerce & Dropshipping', emoji:'📦',
+    tagline:'Physical products, Shopify stores, Amazon FBA',
+    big3: false,
+    tags:['ecommerce','physical','b2c','b2b','video','affiliate','highenergy','allin'],
+    content:'Product research walkthroughs, store builds, ad strategy, supplier sourcing. Community for people building product-based online businesses.',
+    affiliates:['Shopify','DSers / AutoDS','Jungle Scout','Helium 10','Klaviyo','PageFly'],
+    products:['Product research framework','Store launch checklist','Ad creative templates','Supplier outreach scripts','Ecommerce SOPs kit'],
+  },
+  {
+    id:'saas', name:'SaaS & Software Tools', emoji:'⚙️',
+    tagline:'Reviews, tutorials, and comparisons of business software',
+    big3: false,
+    tags:['saas','tech','b2b','smb','writing','video','affiliate','medium','highenergy'],
+    content:'Tool reviews, head-to-head comparisons, tutorial walkthroughs, "best tools for X" roundups. Community for business owners and marketers finding better software.',
+    affiliates:['Monday.com','HubSpot','Airtable','Zapier','ActiveCampaign','ClickUp'],
+    products:['Ultimate SaaS stack guide by use case','Automation workflow templates','CRM setup course','Productivity system course','Tool comparison database'],
+  },
+  {
+    id:'ai', name:'AI Tools & Productivity', emoji:'🤖',
+    tagline:'The fastest-growing content category right now',
+    big3: false,
+    tags:['ai','tech','saas','marketing','b2c','b2b','video','screencast','affiliate','digitalproducts','highenergy','allin','creator'],
+    content:'AI tool tutorials, workflow walkthroughs, prompt engineering, automation breakdowns. Community for people using AI to work faster and build businesses.',
+    affiliates:['Jasper','Copy.ai','Descript','Midjourney','ElevenLabs','Make (Integromat)'],
+    products:['AI prompt library by use case','AI content workflow course','Automation blueprint','AI business toolkit','ChatGPT mastery guide'],
+  },
+  {
+    id:'marketing', name:'Content Marketing & Social Media', emoji:'📱',
+    tagline:'Help brands and creators grow online — massive B2B demand',
+    big3: false,
+    tags:['marketing','b2b','smb','creator','video','writing','affiliate','services','coaching','medium','highenergy'],
+    content:'Platform-specific growth tips, content strategy breakdowns, analytics deep dives, behind-the-scenes content builds. Community for marketers and small business owners.',
+    affiliates:['Later','Buffer','Metricool','Canva Pro','Semrush','Surfer SEO'],
+    products:['Content calendar templates','Social media audit kit','Brand voice guide template','30-day content challenge','Marketing strategy course'],
+  },
+  {
+    id:'creator', name:'Creator Economy & Monetizing Content', emoji:'🎬',
+    tagline:'Help other creators turn their audience into income',
+    big3: false,
+    tags:['creator','marketing','b2b','video','audio','writing','affiliate','digitalproducts','coaching','highenergy','allin'],
+    content:'Monetization breakdowns, platform comparisons, sponsorship pitching, newsletter building, community building. Community for serious creators building a business.',
+    affiliates:['Beehiiv','Substack','Gumroad','Patreon','Stan Store','ConvertKit'],
+    products:['Creator monetization playbook','Sponsorship pitch template kit','Newsletter growth guide','Digital product launch kit','Community building course'],
+  },
+
+  /* ── TRAVEL ── */
+  {
+    id:'travelb2c', name:'Travel (Consumer)', emoji:'✈️',
+    tagline:'Help people travel better, cheaper, or more adventurously',
+    big3: false,
+    tags:['travel','travelb2c','b2c','video','facecam','writing','affiliate','audience','digitalproducts','medium','highenergy'],
+    content:'Destination guides, packing lists, budget travel tips, itineraries. Community for people planning trips or dreaming of travel.',
+    affiliates:['Booking.com','TripAdvisor','World Nomads (insurance)','Priority Pass','Chase Sapphire (credit cards)','Airalo (eSIM)'],
+    products:['Destination-specific itinerary packs','Ultimate packing list','Travel hacking guide','Budget travel course','Travel planning template kit'],
+  },
+  {
+    id:'travelb2b', name:'Travel (B2B / Travel Agents)', emoji:'🗺️',
+    tagline:'Help travel agents and hospitality pros grow their business',
+    big3: false,
+    tags:['travel','travelb2b','b2b','professional','writing','video','services','coaching','affiliate','medium'],
+    content:'Marketing strategies for travel agents, booking platform reviews, niche travel specialization, client acquisition. Community for travel industry professionals.',
+    affiliates:['Travelpayouts','IATA tools','TravelJoy (CRM)','Mailchimp','Canva Pro','Fora Travel'],
+    products:['Travel agent marketing toolkit','Client questionnaire templates','Niche specialization guide','Social media kit for agents','Referral program blueprint'],
+  },
+  {
+    id:'luxurytravel', name:'Luxury & Points Travel', emoji:'🥂',
+    tagline:'Business class and 5-star hotels on a normal person budget',
+    big3: false,
+    tags:['travel','travelb2c','b2c','finance','affiliate','video','writing','audience','medium'],
+    content:'Credit card point strategy, award booking walkthroughs, lounge access guides, hotel upgrade tips. Community for travel hackers and points enthusiasts.',
+    affiliates:['Chase Sapphire','Amex Platinum','Capital One Venture','The Points Guy partnerships','Award Wallet'],
+    products:['Points and miles starter guide','Award booking walkthrough','Credit card comparison guide','Luxury travel on a budget course','Travel hacking toolkit'],
+  },
+
+  /* ── HEALTH / WELLNESS ── */
+  {
+    id:'fitness', name:'Fitness & Strength Training', emoji:'🏋️',
+    tagline:'One of the most searched topics online, forever',
+    big3: false,
+    tags:['health','fitness','b2c','video','facecam','affiliate','digitalproducts','coaching','medium','highenergy'],
+    content:'Workout programming, form tutorials, progress tracking, supplement reviews. Community for people committed to getting stronger.',
+    affiliates:['MyProtein','Gainful','Whoop','Roman Health','Tonal','Garage Gym Reviews'],
+    products:['12-week strength program','Home gym setup guide','Supplement stack guide','Periodization for beginners','Fitness tracking spreadsheet'],
+  },
+  {
+    id:'nutrition', name:'Nutrition & Healthy Eating', emoji:'🥗',
+    tagline:'Help people eat better without making it complicated',
+    big3: false,
+    tags:['health','nutrition','food','b2c','video','writing','affiliate','digitalproducts','loweffort','medium'],
+    content:'Meal prep tutorials, macro breakdowns, grocery guides, recipe creation. Community for people simplifying their eating habits.',
+    affiliates:['Thrive Market','Sunbasket','ButcherBox','Cronometer','Precision Nutrition'],
+    products:['Weekly meal prep kit','Macro tracking beginner guide','Clean eating recipe book','Grocery list templates','Nutrition for busy people course'],
+  },
+  {
+    id:'mentalhealth', name:'Mental Health & Mindfulness', emoji:'🧠',
+    tagline:'Anxiety, stress, burnout — a massive and growing audience',
+    big3: false,
+    tags:['mentalhealth','wellness','personaldevelopment','b2c','writing','audio','video','affiliate','digitalproducts','loweffort','medium'],
+    content:'Mindfulness practices, anxiety management, journaling prompts, therapy tool explainers. Community for people prioritizing mental wellness.',
+    affiliates:['Headspace','Calm','BetterHelp','Talkspace','Insight Timer'],
+    products:['Daily mindfulness journal (PDF)','Anxiety toolkit','Stress reset guide','Meditation starter kit','Mental health habit tracker'],
+  },
+  {
+    id:'wellness', name:'Holistic Wellness & Natural Health', emoji:'🌿',
+    tagline:'Supplements, sleep, biohacking, natural remedies',
+    big3: false,
+    tags:['wellness','health','b2c','video','writing','affiliate','digitalproducts','loweffort','medium'],
+    content:'Sleep optimization, supplement reviews, breathwork, cold therapy, natural health alternatives. Community for wellness-curious people.',
+    affiliates:['Eight Sleep','Athletic Greens','Organifi','HVMN','Levels Health'],
+    products:['Sleep optimization guide','Morning routine framework','Supplement stack by goal','Biohacking beginner guide','30-day wellness reset'],
+  },
+
+  /* ── RELATIONSHIPS ── */
+  {
+    id:'dating', name:'Dating & Attraction', emoji:'💘',
+    tagline:'Help single people navigate modern dating',
+    big3: false,
+    tags:['dating','relationships','b2c','video','writing','audio','affiliate','digitalproducts','coaching','medium'],
+    content:'Dating app strategies, first date advice, conversation frameworks, confidence building. Community for single people trying to date intentionally.',
+    affiliates:['Match.com','eHarmony','Hinge Pro','Lovebook','The 5 Love Languages (book)'],
+    products:['Dating app profile guide','First date conversation guide','Confidence building blueprint','Online dating course','Text response templates'],
+  },
+  {
+    id:'parenting', name:'Parenting & Family Life', emoji:'👨‍👩‍👧‍👦',
+    tagline:'Incredibly passionate audience — parents will spend on their kids',
+    big3: false,
+    tags:['parenting','relationships','b2c','video','writing','affiliate','digitalproducts','loweffort','medium'],
+    content:'Parenting strategies, age-by-age guides, family routines, screen time, education at home. Community for parents trying to do it better.',
+    affiliates:['KiwiCo','Highlights','Reading Eggs','Audible Kids','Lovevery'],
+    products:['Family routine templates','Screen time boundaries guide','Age-by-age activity guides','Parenting communication scripts','Summer activity planner'],
+  },
+
+  /* ── FOOD ── */
+  {
+    id:'food', name:'Food, Cooking & Recipes', emoji:'🍳',
+    tagline:'YouTube and TikTok love food content — massive organic reach',
+    big3: false,
+    tags:['food','cooking','b2c','video','facecam','writing','affiliate','audience','digitalproducts','loweffort'],
+    content:'Recipe tutorials, cuisine deep dives, kitchen equipment reviews, meal prep for beginners. Community for people who love cooking or want to learn.',
+    affiliates:['Made In Cookware','OXO','HelloFresh','Home Chef','America\'s Test Kitchen'],
+    products:['Recipe collection (PDF / digital cookbook)','Meal planning templates','Beginner kitchen guide','30-day cooking challenge','Cuisine-specific course'],
+  },
+  {
+    id:'foodbiz', name:'Food Business & Restaurant / Catering', emoji:'🍽️',
+    tagline:'Help food entrepreneurs build and grow their business',
+    big3: false,
+    tags:['food','b2b','professional','smb','writing','video','services','coaching','affiliate','medium'],
+    content:'Menu pricing, food cost management, marketing for restaurants, catering business setup, social media for food brands. Community for food business owners.',
+    affiliates:['Toast POS','Square for Restaurants','Canva Pro','MarketMan','OpenTable'],
+    products:['Menu pricing calculator','Food cost spreadsheet','Catering quote template','Restaurant marketing playbook','Food biz launch checklist'],
+  },
+
+  /* ── PET / ANIMALS ── */
+  {
+    id:'pets', name:'Pets & Animal Care', emoji:'🐾',
+    tagline:'Pet owners spend like crazy — loyal, passionate audience',
+    big3: false,
+    tags:['pets','b2c','video','facecam','writing','affiliate','digitalproducts','audience','loweffort','medium'],
+    content:'Training tutorials, breed guides, product reviews, vet cost breakdowns, pet health tips. Community for dedicated pet owners.',
+    affiliates:['Chewy','BarkBox','Nom Nom','PetPlate','Embark (DNA testing)','Petco'],
+    products:['Dog training beginner guide','New pet owner checklist','Pet health tracker','Training video series','Breed-specific care guide'],
+  },
+  {
+    id:'petbiz', name:'Pet Business (Grooming, Training, Boarding)', emoji:'🐕',
+    tagline:'Help pet service providers grow their local business',
+    big3: false,
+    tags:['pets','b2b','professional','smb','services','coaching','writing','video','affiliate','medium'],
+    content:'Marketing for groomers, trainers, and boarders. Pricing strategies, client acquisition, social media for local businesses. Community for pet business owners.',
+    affiliates:['Time To Pet','MoeGo (booking software)','Canva Pro','Square','Google Workspace'],
+    products:['Pet business marketing kit','Client onboarding templates','Service pricing guide','Social media content calendar','Pet business launch course'],
+  },
+
+  /* ── HOME / DIY ── */
+  {
+    id:'home', name:'Home Improvement & DIY', emoji:'🔨',
+    tagline:'Huge YouTube audience — people watch hours of home project content',
+    big3: false,
+    tags:['home','diy','b2c','video','facecam','affiliate','audience','digitalproducts','medium','highenergy'],
+    content:'Project walkthroughs, tool reviews, renovation planning, before/after transformations. Community for homeowners tackling projects themselves.',
+    affiliates:['Home Depot','Lowe\'s','Amazon Tools','Rockler Woodworking','Ryobi','MilwaukeeTool'],
+    products:['Room renovation planner','Tool starter kit guide','Project cost estimator','Weekend project idea book','Home maintenance checklist'],
+  },
+  {
+    id:'interiordesign', name:'Interior Design & Home Decor', emoji:'🛋️',
+    tagline:'Aspirational, visual content — thrives on Instagram and Pinterest',
+    big3: false,
+    tags:['interiordesign','home','b2c','video','writing','affiliate','audience','digitalproducts','loweffort','medium'],
+    content:'Room makeovers, design on a budget, style guides, furniture sourcing, color theory. Community for people who love making their space beautiful.',
+    affiliates:['Wayfair','Article','IKEA affiliate','Society6','Havenly','Modsy'],
+    products:['Room layout templates','Budget room makeover guide','Interior style quiz','Design mood board kit','Furniture sourcing guide'],
+  },
+
+  /* ── TECH ── */
+  {
+    id:'tech', name:'Consumer Tech & Gadget Reviews', emoji:'📱',
+    tagline:'Strong affiliate commissions — Amazon, Best Buy, manufacturer programs',
+    big3: false,
+    tags:['tech','b2c','video','screencast','affiliate','audience','medium','highenergy'],
+    content:'Product reviews, comparisons, unboxings, best-of guides, tech for specific use cases. Community for tech enthusiasts and smart shoppers.',
+    affiliates:['Amazon Associates','Best Buy','Newegg','B&H Photo','Anker'],
+    products:['Tech buying guide by use case','Home office setup guide','Budget tech stack guide','Tech for entrepreneurs course','Gadget review template kit'],
+  },
+
+  /* ── OUTDOORS / HOBBIES ── */
+  {
+    id:'outdoors', name:'Outdoor Adventure & Hiking', emoji:'🏕️',
+    tagline:'Passionate community with strong affiliate product opportunities',
+    big3: false,
+    tags:['outdoors','hobbies','b2c','video','facecam','writing','affiliate','audience','digitalproducts','medium'],
+    content:'Trail guides, gear reviews, trip planning, beginner to advanced skill tutorials. Community for outdoor enthusiasts and adventure seekers.',
+    affiliates:['REI','Backcountry','Alltrails Pro','GaiaGPS','Mountain Hardwear','Osprey'],
+    products:['Trail guide pack (by region)','Beginner backpacking checklist','Gear guide by budget','Trip planning templates','Outdoor skills course'],
+  },
+  {
+    id:'fishing', name:'Fishing', emoji:'🎣',
+    tagline:'One of the most fanatical hobby communities online',
+    big3: false,
+    tags:['outdoors','hobbies','b2c','video','facecam','affiliate','audience','loweffort','medium'],
+    content:'Species-specific tutorials, gear reviews, location guides, technique breakdowns. Community for anglers of all levels.',
+    affiliates:['Bass Pro Shops','Tackle Warehouse','Rapala','Humminbird','Shimano'],
+    products:['Fishing spots guide (by region)','Beginner tackle guide','Species-specific technique guide','Tournament prep checklist','Fishing log template'],
+  },
+  {
+    id:'gaming', name:'Gaming & Game Reviews', emoji:'🎮',
+    tagline:'Massive young audience — Twitch, YouTube, and Discord',
+    big3: false,
+    tags:['gaming','hobbies','tech','b2c','video','audio','affiliate','audience','medium','highenergy'],
+    content:'Game reviews, tutorial content, gear setups, gaming news, speedruns or competitive strategy. Community for gamers around a genre or platform.',
+    affiliates:['Razer','SteelSeries','Elgato','Green Man Gaming','Fanatical','Humble Bundle'],
+    products:['Game genre starter guide','Streaming setup guide','Competitive strategy guide','Gaming productivity kit','Game review template'],
+  },
+  {
+    id:'crafts', name:'Arts, Crafts & Creative Hobbies', emoji:'🎨',
+    tagline:'Etsy sellers, makers, and creatives are a thriving online community',
+    big3: false,
+    tags:['crafts','hobbies','b2c','video','facecam','writing','affiliate','ecommerce','digitalproducts','loweffort','medium'],
+    content:'Project tutorials, supply reviews, Etsy shop strategy, creative business tips, skill breakdowns. Community for makers and creative side hustlers.',
+    affiliates:['Cricut','Etsy affiliate','Blick Art','Michaels','Spoonflower'],
+    products:['Etsy shop launch guide','Craft supply buying guide','Project tutorial bundles','Creative business course','Pricing your crafts guide'],
+  },
+  {
+    id:'sports', name:'Sports Coaching & Training', emoji:'⚽',
+    tagline:'Parents of young athletes + adult amateur players — big spend',
+    big3: false,
+    tags:['sports','fitness','b2c','b2b','video','facecam','coaching','affiliate','digitalproducts','medium','highenergy'],
+    content:'Sport-specific skill tutorials, training programs, game analysis, coaching strategy. Community for players, coaches, and parents of athletes.',
+    affiliates:['Nike','Under Armour','Hudl','TrainingPeaks','DICK\'S Sporting Goods'],
+    products:['Sport-specific training program','Drill library (video series)','Youth coaching guide','Parent\'s guide to youth sports','Game film analysis guide'],
+  },
+  {
+    id:'woodworking', name:'Woodworking & Furniture Making', emoji:'🪵',
+    tagline:'YouTube-native content — project videos get millions of views',
+    big3: false,
+    tags:['diy','hobbies','home','b2c','video','facecam','affiliate','audience','digitalproducts','medium','highenergy'],
+    content:'Project builds, tool reviews, joinery techniques, wood selection, beginner to pro skills. Community for woodworkers and furniture makers.',
+    affiliates:['Rockler','Woodcraft','Festool','Laguna Tools','Amazon Tools'],
+    products:['Beginner project plans (PDF)','Tool buying guide by budget','Wood selection guide','Joinery techniques course','Workshop setup guide'],
+  },
+
+  /* ── FAITH / PERSONAL DEV ── */
+  {
+    id:'personaldevelopment', name:'Personal Development & Productivity', emoji:'🚀',
+    tagline:'Always popular — huge book, course, and tool affiliate potential',
+    big3: false,
+    tags:['personaldevelopment','mindset','b2c','writing','video','audio','affiliate','digitalproducts','coaching','medium','highenergy'],
+    content:'Habit building, goal setting, morning routines, book summaries, productivity systems. Community for growth-oriented people.',
+    affiliates:['Audible','Blinkist','Notion','Superhuman','Brain.fm','Morning Brew'],
+    products:['Productivity system course','Habit tracking kit','Annual goal planning guide','Morning routine blueprint','Book summary library'],
+  },
+  {
+    id:'mindset', name:'Mindset & Success Coaching', emoji:'🧠',
+    tagline:'High-ticket coaching potential — people pay well for mindset work',
+    big3: false,
+    tags:['mindset','personaldevelopment','b2c','video','audio','writing','coaching','digitalproducts','affiliate','medium','highenergy'],
+    content:'Mental frameworks, limiting belief work, confidence building, visualization, life redesign. Community for people committed to a different life.',
+    affiliates:['Mindvalley','Tony Robbins products','Brendon Burchard courses','Hay House'],
+    products:['Limiting belief workbook','90-day life redesign guide','Confidence challenge','Mindset journaling kit','Success system course'],
+  },
+  {
+    id:'faith', name:'Faith & Spirituality', emoji:'✝️',
+    tagline:'Deeply loyal audience — faith communities are tight-knit',
+    big3: false,
+    tags:['faith','b2c','writing','video','audio','affiliate','digitalproducts','audience','loweffort','medium'],
+    content:'Devotional content, Bible study guides, faith and business, spiritual growth, prayer journaling. Community for people growing in their faith.',
+    affiliates:['Crossway','Logos Bible Software','DaySpring','Christian Book Distributors'],
+    products:['Bible study guide','Prayer journal (PDF)','Faith and business course','Devotional series','Scripture memory system'],
+  },
+
+  /* ── EDUCATION ── */
+  {
+    id:'education', name:'Online Education & Course Creation', emoji:'🎓',
+    tagline:'Help educators, coaches, and experts sell what they know',
+    big3: false,
+    tags:['education','b2b','creator','writing','video','affiliate','digitalproducts','coaching','services','medium','highenergy'],
+    content:'Course platform reviews, curriculum design, student engagement strategies, launch playbooks. Community for coaches and educators going online.',
+    affiliates:['Teachable','Kajabi','Thinkific','Podia','ThriveCart','Loom'],
+    products:['Course creation blueprint','Curriculum design template','Launch email sequence','Student onboarding kit','Pricing your expertise guide'],
+  },
+  {
+    id:'tutoring', name:'Tutoring & Academic Help', emoji:'📚',
+    tagline:'Parents are highly motivated buyers when their kids need help',
+    big3: false,
+    tags:['education','tutoring','parenting','b2c','b2b','writing','video','services','coaching','digitalproducts','loweffort','medium'],
+    content:'Subject-specific explainers, study strategy tips, parent guides, test prep, learning frameworks. Community for students, parents, and tutors.',
+    affiliates:['Khan Academy (tools)','Chegg','Varsity Tutors','Magoosh','Quizlet Pro'],
+    products:['Study system guide','Test prep bundle','Subject-specific workbook','Parent\'s tutor selection guide','Tutoring business launch kit'],
+  },
+
+  /* ── PROFESSIONAL / B2B ── */
+  {
+    id:'realestate', name:'Real Estate Investing', emoji:'🏠',
+    tagline:'High-intent buyers — people investing want the right information',
+    big3: false,
+    tags:['wealth','finance','investing','b2c','b2b','video','writing','affiliate','coaching','digitalproducts','highenergy','allin'],
+    content:'Rental property analysis, house hacking, short-term rental strategy, market research. Community for aspiring and active real estate investors.',
+    affiliates:['Fundrise','Roofstock','PropStream','BiggerPockets Pro','Landlord Studio'],
+    products:['Rental property analysis calculator','House hacking guide','Short-term rental launch kit','Real estate deal analyzer','Market research framework'],
+  },
+  {
+    id:'legalfinance', name:'Legal & Financial Services Marketing', emoji:'⚖️',
+    tagline:'Help attorneys, accountants, and advisors get clients online',
+    big3: false,
+    tags:['b2b','professional','smb','writing','video','services','coaching','affiliate','medium','highenergy'],
+    content:'Digital marketing for legal and financial professionals, SEO for advisors, content strategy for regulated industries, client acquisition. Community for service professionals.',
+    affiliates:['Clio (legal software)','PracticePanther','AdvisorEngine','Wealthbox','Canva Pro'],
+    products:['Professional services marketing guide','SEO for advisors course','Client acquisition playbook','Content strategy for regulated industries','LinkedIn lead gen kit'],
+  },
+  {
+    id:'localservices', name:'Local Service Business Marketing', emoji:'📍',
+    tagline:'Plumbers, landscapers, cleaners — all need to be found online',
+    big3: false,
+    tags:['b2b','smb','marketing','services','writing','video','affiliate','coaching','medium'],
+    content:'Google Business optimization, local SEO, review generation, social media for local businesses, paid ads basics. Community for local business owners.',
+    affiliates:['Jobber','ServiceTitan','Broadly','Housecall Pro','Canva Pro','Mailchimp'],
+    products:['Google Business Profile setup guide','Local SEO checklist','Review generation system','Local ads beginner guide','Client retention toolkit'],
+  },
+  {
+    id:'hr', name:'HR, Recruiting & Career Coaching', emoji:'👔',
+    tagline:'Job seekers and HR pros — two distinct audiences, both underserved',
+    big3: false,
+    tags:['b2b','professional','b2c','writing','video','coaching','services','digitalproducts','affiliate','medium'],
+    content:'Resume writing, interview prep, LinkedIn optimization, hiring strategy, career pivots. Community for job seekers or HR professionals.',
+    affiliates:['LinkedIn Premium','Resumeworded','Enhancv','Topresume','BambooHR'],
+    products:['Resume template kit','Interview prep guide','LinkedIn optimization course','Career pivot blueprint','Hiring manager\'s toolkit'],
+  },
+  {
+    id:'photography', name:'Photography & Videography', emoji:'📷',
+    tagline:'Gear-obsessed audience with strong affiliate opportunities',
+    big3: false,
+    tags:['hobbies','b2c','b2b','video','facecam','affiliate','digitalproducts','services','coaching','medium','highenergy'],
+    content:'Camera reviews, lighting tutorials, editing walkthroughs, photography business tips. Community for photographers from hobbyist to professional.',
+    affiliates:['B&H Photo','Adorama','Adobe Creative Cloud','Lightroom presets','Peak Design','Squarespace'],
+    products:['Photography beginner guide','Lightroom preset pack','Wedding photography business kit','Portrait lighting guide','Photography pricing calculator'],
+  },
+  {
+    id:'sustainability', name:'Sustainability & Eco-Friendly Living', emoji:'🌱',
+    tagline:'Growing fast — younger audiences are passionate and values-driven',
+    big3: false,
+    tags:['wellness','b2c','writing','video','affiliate','audience','digitalproducts','loweffort','medium'],
+    content:'Zero-waste swaps, sustainable product reviews, eco-friendly home guides, green business tips. Community for people trying to live and shop more sustainably.',
+    affiliates:['Grove Collaborative','Package Free Shop','Pela Case','Allbirds','Earth Hero'],
+    products:['Zero-waste starter kit','Sustainable shopping guide','Eco home audit checklist','Green living challenge','Sustainable business guide'],
+  },
+  {
+    id:'fashion', name:'Fashion, Style & Personal Branding', emoji:'👗',
+    tagline:'Visual content that works on every platform — huge affiliate potential',
+    big3: false,
+    tags:['b2c','video','facecam','writing','affiliate','audience','digitalproducts','loweffort','medium'],
+    content:'Outfit ideas, capsule wardrobe guides, personal style frameworks, thrift finds, brand building for professionals. Community around style and self-expression.',
+    affiliates:['LTK (LikeToKnowIt)','ShopStyle','Amazon Fashion','Nordstrom','Poshmark'],
+    products:['Capsule wardrobe guide','Personal style quiz + guide','Closet audit template','Professional wardrobe course','Style on a budget guide'],
+  },
+  {
+    id:'beautybeauty', name:'Beauty, Skincare & Cosmetics', emoji:'💄',
+    tagline:'One of the highest affiliate commission categories online',
+    big3: false,
+    tags:['b2c','video','facecam','writing','affiliate','audience','digitalproducts','loweffort','medium'],
+    content:'Product reviews, skincare routines, makeup tutorials, ingredient breakdowns, budget vs luxury comparisons. Community for beauty enthusiasts.',
+    affiliates:['Sephora','Ulta','Dermstore','CultBeauty','Fenty Beauty','Paula\'s Choice'],
+    products:['Skincare routine guide by skin type','Budget beauty toolkit','Ingredient cheat sheet','Makeup beginner course','Skincare tracker template'],
+  },
+];
+
+/* ════════════════════════════════════════════════════════
+   STATE & LOGIC
+════════════════════════════════════════════════════════ */
+let currentQ = 0;
+let answers  = {};   // { questionId: [tag, tag, ...] }
+
+function startQuiz() {
+  showScreen('quiz');
+  renderQuestion(0);
+}
+
+function retakeQuiz() {
+  currentQ = 0;
+  answers  = {};
+  showScreen('quiz');
+  renderQuestion(0);
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderQuestion(idx) {
+  const q   = QUESTIONS[idx];
+  const pct = ((idx + 1) / QUESTIONS.length) * 100;
+
+  document.getElementById('progress-fill').style.width  = pct + '%';
+  document.getElementById('progress-count').textContent = (idx + 1) + ' of ' + QUESTIONS.length;
+
+  const selected = answers[q.id] || [];
+
+  const colClass = q.cols === 1 ? 'cols-1' : q.cols === 3 ? 'cols-3' : '';
+
+  const optionsHTML = q.options.map((opt, i) => {
+    const isSel = selected.some(t => opt.tags.includes(t)) &&
+      (q.multi ? true : selected[0] !== undefined &&
+        opt.tags.some(t => selected.includes(t)));
+    return `
+      <button class="option-btn${isSel ? ' selected' : ''}"
+              onclick="selectOption('${q.id}', ${i}, ${q.multi})">
+        <div class="option-check">${isSel ? '✓' : ''}</div>
+        <span>${opt.label}</span>
+      </button>`;
+  }).join('');
+
+  document.getElementById('question-container').innerHTML = `
+    <div class="question-block">
+      <div class="q-number">// question ${idx + 1}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-sub">${q.sub}</div>
+      ${q.multi ? '<div class="q-note">Select all that apply.</div>' : ''}
+      <div class="options-grid ${colClass}" id="opts-${q.id}">${optionsHTML}</div>
+      <div class="quiz-nav">
+        ${idx > 0
+          ? `<button class="btn-ghost" onclick="goBack()">← back</button>`
+          : `<span></span>`}
+        ${q.multi
+          ? `<button class="btn-primary" onclick="nextQuestion()">
+               ${idx === QUESTIONS.length - 1 ? 'See my results →' : 'Next →'}
+             </button>`
+          : `<span></span>`}
+      </div>
+    </div>`;
+}
+
+function selectOption(qId, optIdx, isMulti) {
+  const q   = QUESTIONS.find(q => q.id === qId);
+  const opt = q.options[optIdx];
+
+  if (!isMulti) {
+    // single select — store tags, auto-advance
+    answers[qId] = opt.tags;
+    const next = currentQ + 1;
+    if (next >= QUESTIONS.length) {
+      showResults();
+    } else {
+      currentQ = next;
+      renderQuestion(currentQ);
+    }
+  } else {
+    // multi select — toggle
+    if (!answers[qId]) answers[qId] = [];
+    const existing = answers[qId];
+    const alreadySelected = opt.tags.some(t => existing.includes(t));
+    if (alreadySelected) {
+      answers[qId] = existing.filter(t => !opt.tags.includes(t));
+    } else {
+      answers[qId] = [...existing, ...opt.tags];
+    }
+    renderQuestion(currentQ);
+  }
+}
+
+function nextQuestion() {
+  const next = currentQ + 1;
+  if (next >= QUESTIONS.length) {
+    showResults();
+  } else {
+    currentQ = next;
+    renderQuestion(currentQ);
+  }
+}
+
+function goBack() {
+  if (currentQ > 0) {
+    currentQ--;
+    renderQuestion(currentQ);
+  }
+}
+
+/* ── SCORING ── */
+function scoreNiches() {
+  // Flatten all selected tags
+  const allTags = Object.values(answers).flat();
+  const tagCounts = {};
+  allTags.forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; });
+
+  return NICHES.map(niche => {
+    let score = 0;
+    niche.tags.forEach(t => {
+      if (tagCounts[t]) score += tagCounts[t];
+    });
+    // Normalise to 0–100
+    const maxPossible = niche.tags.length * 3;
+    const pct = Math.round((score / maxPossible) * 100);
+    return { ...niche, score, pct: Math.min(pct, 100) };
+  }).sort((a, b) => b.score - a.score);
+}
+
+/* ── RENDER RESULTS ── */
+function showResults() {
+  const ranked = scoreNiches();
+  const big3   = ranked.filter(n => n.big3);
+  const others = ranked.filter(n => !n.big3);
+
+  document.getElementById('results-big3').innerHTML  = big3.map((n, i)   => nicheCard(n, i + 1, true)).join('');
+  document.getElementById('results-other').innerHTML = others.map((n, i) => nicheCard(n, i + 1, false)).join('');
+
+  showScreen('results');
+}
+
+function nicheCard(niche, rank, isBig3) {
+  const barW = Math.max(niche.pct, 8);
+  const rankStr = isBig3 ? '★' : '#' + rank;
+  return `
+    <div class="niche-card${isBig3 ? ' big3' : ''}" id="card-${niche.id}">
+      <div class="niche-card-header" onclick="toggleCard('${niche.id}')">
+        <div class="niche-card-left">
+          <span class="niche-rank">${rankStr}</span>
+          <span class="niche-badge">${niche.emoji}</span>
+          <div class="niche-info">
+            <div class="niche-name">${niche.name}</div>
+            <div class="niche-tagline">${niche.tagline}</div>
+          </div>
+        </div>
+        <div class="niche-right">
+          <div class="niche-score-bar">
+            <div class="niche-score-fill" style="width:${barW}%"></div>
+          </div>
+          <span class="niche-score-pct">${niche.pct}%</span>
+          <span class="niche-chevron">▾</span>
+        </div>
+      </div>
+      <div class="niche-detail">
+        <p class="detail-content">${niche.content}</p>
+        <div class="detail-grid">
+          <div class="detail-section">
+            <div class="detail-label">Affiliate opportunities</div>
+            <ul class="detail-list">
+              ${niche.affiliates.map(a => `<li>${a}</li>`).join('')}
+            </ul>
+          </div>
+          <div class="detail-section">
+            <div class="detail-label">Digital product ideas</div>
+            <ul class="detail-list">
+              ${niche.products.map(p => `<li>${p}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+        <div class="detail-tags">
+          ${isBig3 ? '<span class="tag-pill">always strong</span>' : ''}
+          ${niche.tags.slice(0,4).map(t => `<span class="tag-pill">${t}</span>`).join('')}
+        </div>
+      </div>
+    </div>`;
+}
+
+function toggleCard(id) {
+  const card = document.getElementById('card-' + id);
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>

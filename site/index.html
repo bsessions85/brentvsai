@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brent | @brentvsai</title>
+  <meta name="description" content="44-year-old software engineer. Dad of 4. Building $0 to $10K in 90 days using AI — on camera, in public, for real.">
+
+  <!-- Open Graph (for link previews on social) -->
+  <meta property="og:title" content="Brent | @brentvsai">
+  <meta property="og:description" content="Building $0 to $10K in 90 days using AI. Dad of 4. Software engineer.">
+  <meta property="og:image" content="assets/profile.png">
+  <meta property="og:url" content="https://brentvsai.com">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0e0e0e;
+      --surface: #161616;
+      --border:  #2a2a2a;
+      --border2: #3a3a3a;
+      --text:    #e8e6e0;
+      --muted:   #6b6b6b;
+      --accent:  #e8c468;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.25rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─────────────────────────────────────────
+       LAYOUT
+    ───────────────────────────────────────── */
+    .wrapper {
+      width: 100%;
+      max-width: 420px;
+      animation: fadeUp 0.45s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─────────────────────────────────────────
+       HEADER
+    ───────────────────────────────────────── */
+    .header { margin-bottom: 2rem; }
+
+    .top-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 1.1rem;
+    }
+
+    .avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--surface);
+    }
+
+    .avatar-initials {
+      width: 68px;
+      height: 68px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .name-block { flex: 1; padding-top: 2px; }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tag::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.35; transform: scale(0.75); }
+    }
+
+    .name {
+      font-family: var(--mono);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .handle {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .bio {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      border-left: 2px solid var(--border);
+      padding-left: 12px;
+    }
+
+    .bio strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ─────────────────────────────────────────
+       DIVIDER & LABELS
+    ───────────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.75rem 0;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ─────────────────────────────────────────
+       LINK BUTTONS
+    ───────────────────────────────────────── */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 1.75rem;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      text-decoration: none;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+    }
+
+    .link-btn:hover {
+      border-color: var(--border2);
+      background: #1c1c1c;
+      transform: translateX(3px);
+    }
+
+    .link-btn.primary {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .link-btn.primary:hover {
+      background: rgba(232, 196, 104, 0.06);
+      border-color: #f0d07a;
+    }
+
+    .link-btn-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .link-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .link-btn.primary .link-icon {
+      background: rgba(232, 196, 104, 0.08);
+      border-color: rgba(232, 196, 104, 0.3);
+    }
+
+    .link-arrow {
+      font-size: 14px;
+      color: var(--muted);
+      transition: color 0.15s ease, transform 0.15s ease;
+    }
+
+    .link-btn:hover .link-arrow { color: var(--text); transform: translateX(2px); }
+    .link-btn.primary .link-arrow { color: var(--accent); }
+
+    /* ─────────────────────────────────────────
+       STATS
+    ───────────────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 1.75rem;
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+
+    .stat-val {
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .stat-val.live { color: var(--accent); }
+
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─────────────────────────────────────────
+       SOCIAL ROW
+    ───────────────────────────────────────── */
+    .social-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .social-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .social-btn:hover { border-color: var(--border2); color: var(--text); }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    .footer { margin-top: 2rem; text-align: center; }
+
+    .footer-text {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="top-row">
+        <div id="avatar-slot"></div>
+        <div class="name-block">
+          <div class="tag" id="tag-line">loading...</div>
+          <div class="name" id="site-name"></div>
+          <div class="handle" id="site-handle"></div>
+        </div>
+      </div>
+      <p class="bio" id="site-bio"></p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- LINKS -->
+    <div class="section-label">// start here</div>
+    <div class="links" id="links-container"></div>
+
+    <hr class="divider">
+
+    <!-- STATS -->
+    <div class="section-label">// live stats</div>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-val live" id="s-day">—</div>
+        <div class="stat-label">day</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val live" id="s-earned">$0</div>
+        <div class="stat-label">earned</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" id="s-followers">—</div>
+        <div class="stat-label">followers</div>
+      </div>
+    </div>
+
+    <!-- SOCIAL -->
+    <div class="section-label">// find me</div>
+    <div class="social-row" id="social-container"></div>
+
+    <div class="footer">
+      <p class="footer-text">built by a tired dad with AI</p>
+    </div>
+
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════════
+       CONFIG — edit this block every week, nothing else
+       ═══════════════════════════════════════════════ */
+    const CONFIG = {
+
+      /* Profile */
+      name:   "Brent.",
+      handle: "@brentvsai",
+      photo:  "assets/profile.png",   // path to your photo — or set to null to show initials
+      initials: "B",
+
+      /* Bio — use \n for a line break */
+      bio: "44-year-old software engineer. Dad of 4. Building <strong>$0 to $10K in 90 days</strong> using AI — on camera, in public, for real.\n\nMy wife thinks I'm going to fail. <strong>She's probably right.</strong>",
+
+      /* Challenge stats — update weekly */
+      stats: {
+        day:       "—",     // e.g. "12"
+        earned:    "$0",    // e.g. "$347"
+        followers: "—",     // combined across platforms, e.g. "1.2K"
+      },
+
+      /* Links — set primary: true on the one you want highlighted */
+      links: [
+        {
+          label:   "Find Your Niche — Free Quiz",
+          icon:    "🎯",
+          url:     "/quiz/niche",
+          primary: true,
+        },
+        {
+          label:   "Free Community on Skool",
+          icon:    "🎓",
+          url:     "https://www.skool.com/brent-vs-ai-1732",
+          primary: false,
+        },
+        {
+          label:   "Watch the Challenge on YouTube",
+          icon:    "📺",
+          url:     "https://youtube.com/@brentvsai",
+          primary: false,
+        },
+        {
+          label:   "Build It With AI - Get the Full System",
+          icon:    "💼",
+          url:     "/course",
+          primary: false,
+        },
+      ],
+
+      /* Social buttons at the bottom */
+      social: [
+        { label: "TikTok",    url: "https://tiktok.com/@brentvsai" },
+        { label: "Instagram", url: "https://instagram.com/brentvsai" },
+        { label: "YouTube",   url: "https://youtube.com/@brentvsai" },
+      ],
+    };
+    /* ═══════════════════════════════════════════════
+       END CONFIG — don't touch anything below this line
+       ═══════════════════════════════════════════════ */
+
+
+    /* Render profile */
+    document.getElementById('site-name').textContent   = CONFIG.name;
+    document.getElementById('site-handle').textContent = CONFIG.handle;
+    document.getElementById('site-bio').innerHTML      = CONFIG.bio.replace(/\n/g, '<br>');
+
+    /* Avatar */
+    const avatarSlot = document.getElementById('avatar-slot');
+    if (CONFIG.photo) {
+      const img = document.createElement('img');
+      img.src       = CONFIG.photo;
+      img.alt       = CONFIG.name;
+      img.className = 'avatar';
+      img.onerror   = () => { img.replaceWith(makeInitials()); };
+      avatarSlot.appendChild(img);
+    } else {
+      avatarSlot.appendChild(makeInitials());
+    }
+
+    function makeInitials() {
+      const d = document.createElement('div');
+      d.className   = 'avatar-initials';
+      d.textContent = CONFIG.initials;
+      return d;
+    }
+
+    /* Tag line */
+    const day = CONFIG.stats.day !== '—' ? `day ${CONFIG.stats.day} of 90` : 'day — of 90';
+    document.getElementById('tag-line').textContent = `${day} · ${CONFIG.stats.earned} earned`;
+
+    /* Stats */
+    document.getElementById('s-day').textContent       = CONFIG.stats.day;
+    document.getElementById('s-earned').textContent    = CONFIG.stats.earned;
+    document.getElementById('s-followers').textContent = CONFIG.stats.followers;
+
+    /* Links */
+    const linksContainer = document.getElementById('links-container');
+    CONFIG.links.forEach(link => {
+      const a = document.createElement('a');
+      a.href      = link.url;
+      a.className = 'link-btn' + (link.primary ? ' primary' : '');
+      if (!link.url.startsWith('/')) a.target = '_blank';
+      a.innerHTML = `
+        <div class="link-btn-left">
+          <div class="link-icon">${link.icon}</div>
+          <span>${link.label}</span>
+        </div>
+        <span class="link-arrow">→</span>
+      `;
+      linksContainer.appendChild(a);
+    });
+
+    /* Social */
+    const socialContainer = document.getElementById('social-container');
+    CONFIG.social.forEach(s => {
+      const a = document.createElement('a');
+      a.href      = s.url;
+      a.className = 'social-btn';
+      a.target    = '_blank';
+      a.textContent = s.label;
+      socialContainer.appendChild(a);
+    });
+  </script>
+</body>
+</html>

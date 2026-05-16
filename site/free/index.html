@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joining the free community...</title>
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #0e0e0e;
+      --text:   #e8e6e0;
+      --muted:  #6b6b6b;
+      --accent: #e8c468;
+      --mono:   'JetBrains Mono', monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .card {
+      text-align: center;
+      max-width: 320px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin: 0 auto 1.75rem;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.3; transform: scale(0.6); }
+    }
+
+    .label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.6rem;
+    }
+
+    .heading {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .sub strong { color: var(--accent); font-weight: 400; }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      color: var(--accent);
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      transition: background 0.15s;
+    }
+
+    .btn:hover { background: rgba(232, 196, 104, 0.08); }
+
+    .countdown {
+      margin-top: 1.5rem;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .countdown span { color: var(--text); }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="dot"></div>
+    <div class="label">// redirecting</div>
+    <div class="heading">Heading to the free community</div>
+    <p class="sub">Taking you to Skool now.<br>It's free. No credit card. <strong>Just show up.</strong></p>
+    <a class="btn" id="manual-link" href="#" target="_blank">Take me there →</a>
+    <div class="countdown">redirecting in <span id="count">3</span>s</div>
+  </div>
+
+  <script>
+    /* ═══════════════════
+       CONFIG
+       ═══════════════════ */
+    const SKOOL_URL = "https://www.skool.com/brent-vs-ai-1732";
+    /* ═══════════════════
+       END CONFIG
+       ═══════════════════ */
+
+    document.getElementById('manual-link').href = SKOOL_URL;
+
+    let n = 3;
+    const countEl = document.getElementById('count');
+
+    const timer = setInterval(() => {
+      n--;
+      countEl.textContent = n;
+      if (n <= 0) {
+        clearInterval(timer);
+        window.location.href = SKOOL_URL;
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

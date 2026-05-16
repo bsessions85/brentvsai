@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build It With AI — The Digital Business System | BrentVsAI</title>
+  <meta name="description" content="Learn how to find a niche, build an audience, grow a community, and sell digital products — using AI to do most of the heavy lifting. $497 one time.">
+  <meta property="og:title" content="Build It With AI — The Digital Business System">
+  <meta property="og:description" content="The full system. Niche. Content. Community. Product. Built with AI.">
+  <meta property="og:url" content="https://brentvsai.com/course">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0e0e0e;
+      --surface: #161616;
+      --surface2:#1e1e1e;
+      --border:  #2a2a2a;
+      --border2: #3a3a3a;
+      --text:    #e8e6e0;
+      --muted:   #6b6b6b;
+      --accent:  #e8c468;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(14,14,14,0.95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    .topbar-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .topbar-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      background: var(--accent);
+      color: #0e0e0e;
+      border: none;
+      border-radius: 5px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity .15s;
+    }
+
+    .topbar-cta:hover { opacity: .88; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 1.5rem; }
+
+    .inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .inner-wide {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 6rem 1.5rem 5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:.3; transform:scale(.7); }
+    }
+
+    .hero h1 {
+      font-family: var(--mono);
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 3rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      background: var(--accent);
+      color: #0e0e0e;
+      border: none;
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity .15s, transform .1s;
+    }
+
+    .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+
+    .btn-ghost {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color .15s, border-color .15s;
+    }
+
+    .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .proof-item {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .proof-item span { color: var(--accent); font-weight: 700; }
+
+    /* ── SECTION LABELS ── */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-h2 {
+      font-family: var(--mono);
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-h2 em { color: var(--accent); font-style: normal; }
+
+    .section-body {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 580px;
+    }
+
+    .section-body strong { color: var(--text); font-weight: 500; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── FOR WHO ── */
+    .forwhom { border-bottom: 1px solid var(--border); }
+
+    .forwhom-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 2.5rem;
+    }
+
+    .forwhom-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+
+    .forwhom-icon {
+      font-size: 22px;
+      margin-bottom: .75rem;
+    }
+
+    .forwhom-title {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .4rem;
+    }
+
+    .forwhom-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── SYSTEM ── */
+    .system-section { border-bottom: 1px solid var(--border); }
+
+    .system-steps {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .system-step {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .system-step:last-child { border-bottom: none; }
+
+    .step-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 700;
+      min-width: 32px;
+      padding-top: 2px;
+      letter-spacing: 0.06em;
+    }
+
+    .step-content { flex: 1; }
+
+    .step-title {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .step-title em { color: var(--accent); font-style: normal; }
+
+    .step-body {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .step-body strong { color: var(--text); font-weight: 500; }
+
+    .step-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: .75rem;
+    }
+
+    .step-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 8px;
+    }
+
+    /* ── AI ANGLE ── */
+    .ai-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 2.5rem;
+    }
+
+    .ai-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+
+    .ai-card-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: .5rem;
+    }
+
+    .ai-card-title {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: .4rem;
+    }
+
+    .ai-card-body {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-weight: 300;
+    }
+
+    /* ── OBJECTIONS ── */
+    .objections-section { border-bottom: 1px solid var(--border); }
+
+    .objections-list {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .objection {
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .objection:last-child { border-bottom: none; }
+
+    .objection-q {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: .75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .objection-q::before {
+      content: '"';
+      color: var(--border2);
+      margin-right: 2px;
+    }
+
+    .objection-q::after {
+      content: '"';
+      color: var(--border2);
+      margin-left: 2px;
+    }
+
+    .objection-a {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .objection-a strong { color: var(--text); font-weight: 500; }
+
+    /* ── ABOUT ── */
+    .about-section { border-bottom: 1px solid var(--border); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 520px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    .about-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .about-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-body {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .about-body strong { color: var(--text); font-weight: 500; }
+
+    .about-body p + p { margin-top: 1rem; }
+
+    /* ── PRICING ── */
+    .pricing-section { border-bottom: 1px solid var(--border); }
+
+    .pricing-card {
+      margin-top: 2.5rem;
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      overflow: hidden;
+      max-width: 520px;
+    }
+
+    .pricing-header {
+      padding: 1.75rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-name {
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: .4rem;
+    }
+
+    .pricing-tagline {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .pricing-body { padding: 1.75rem 2rem; }
+
+    .pricing-amount {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 1.75rem;
+    }
+
+    .price-num {
+      font-family: var(--mono);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .price-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .includes-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 2rem;
+    }
+
+    .includes-list li {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 300;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+
+    .includes-list li::before {
+      content: '✓';
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .pricing-note {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      text-align: center;
+      padding: 6rem 1.5rem;
+    }
+
+    .final-cta .section-h2 {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-cta .section-body {
+      margin: 1rem auto 2.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .15s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── CONFIG ── */
+  </style>
+</head>
+<body>
+
+  <!-- ── TOPBAR ── -->
+  <nav class="topbar">
+    <a class="topbar-logo" href="/">@brentvsai</a>
+    <a class="topbar-cta" href="https://www.skool.com/brent-vs-ai-1732" target="_blank">Get instant access →</a>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="inner">
+      <div class="hero-tag">// build it with ai</div>
+      <h1>The full system.<br><em>Built with AI.</em></h1>
+      <p class="hero-sub">
+        Find your niche. Build your content. Grow a community. Sell a digital product.<br>
+        <strong>One course. Every step. AI does the heavy lifting.</strong>
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="https://www.skool.com/brent-vs-ai-1732" target="_blank">Get instant access — $497 →</a>
+        <a class="btn-ghost" href="/free">Try the free community first</a>
+      </div>
+      <div class="hero-proof">
+        <div class="proof-item"><span>$497</span> one-time payment</div>
+        <div class="proof-item"><span>No</span> monthly fees</div>
+        <div class="proof-item"><span>No</span> tech experience needed</div>
+        <div class="proof-item"><span>Full</span> system, start to finish</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOR WHO ── -->
+  <section class="forwhom">
+    <div class="inner">
+      <div class="section-label">// who this is for</div>
+      <h2 class="section-h2">This is for <em>regular people</em><br>who are done waiting.</h2>
+      <div class="forwhom-grid">
+        <div class="forwhom-card">
+          <div class="forwhom-icon">💼</div>
+          <div class="forwhom-title">The employed person</div>
+          <div class="forwhom-desc">You have a job. A good one, maybe. But you're maxed out on income and want something that's yours.</div>
+        </div>
+        <div class="forwhom-card">
+          <div class="forwhom-icon">🏠</div>
+          <div class="forwhom-title">The stay-at-home parent</div>
+          <div class="forwhom-desc">You want to build something around your schedule — not someone else's. Something you can work on in small windows of time.</div>
+        </div>
+        <div class="forwhom-card">
+          <div class="forwhom-icon">🔁</div>
+          <div class="forwhom-title">The person who's tried before</div>
+          <div class="forwhom-desc">You've watched the videos. Maybe bought a course. Nothing stuck. The AI layer in this system is what's actually different.</div>
+        </div>
+        <div class="forwhom-card">
+          <div class="forwhom-icon">🧭</div>
+          <div class="forwhom-title">The complete beginner</div>
+          <div class="forwhom-desc">You know you want to build something online. You have no idea where to start. This is the map.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE SYSTEM ── -->
+  <section class="system-section">
+    <div class="inner">
+      <div class="section-label">// what you'll build</div>
+      <h2 class="section-h2">Four steps.<br><em>One complete business.</em></h2>
+      <p class="section-body">Most people fail online because they skip steps. They try to sell before they have an audience. Or they build content before they know their niche. This system goes in order — and AI helps you execute each step without needing a team.</p>
+      <div class="system-steps">
+        <div class="system-step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <div class="step-title"><em>Niche</em> — find your lane</div>
+            <div class="step-body">You'll use a proven framework to pick a niche that fits your interests, your lifestyle, and an audience that actually spends money. <strong>No more guessing. No more picking wrong and starting over.</strong></div>
+            <div class="step-tags">
+              <span class="step-tag">niche research</span>
+              <span class="step-tag">audience selection</span>
+              <span class="step-tag">competitor analysis</span>
+            </div>
+          </div>
+        </div>
+        <div class="system-step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <div class="step-title"><em>Content</em> — show up consistently</div>
+            <div class="step-body">You'll build a content system that runs on AI — scripting, captions, hooks, repurposing. <strong>15 hours a week max. Most people spend that watching Netflix.</strong> You'll put it toward something that compounds.</div>
+            <div class="step-tags">
+              <span class="step-tag">short form video</span>
+              <span class="step-tag">AI scripting</span>
+              <span class="step-tag">content calendar</span>
+              <span class="step-tag">repurposing</span>
+            </div>
+          </div>
+        </div>
+        <div class="system-step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <div class="step-title"><em>Community</em> — build your list</div>
+            <div class="step-body">Your community is your email list, your audience, and your sales floor — all in one place. <strong>You'll set it up on Skool, grow it with free members, and convert them to buyers.</strong> This is where the money actually comes from.</div>
+            <div class="step-tags">
+              <span class="step-tag">skool setup</span>
+              <span class="step-tag">lead magnets</span>
+              <span class="step-tag">community growth</span>
+              <span class="step-tag">nurture sequences</span>
+            </div>
+          </div>
+        </div>
+        <div class="system-step">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <div class="step-title"><em>Product</em> — sell something</div>
+            <div class="step-body">You'll learn how to monetize the audience you've built — whether that's a digital course, an ebook, a white-labeled product, or affiliate commissions. <strong>You don't need to create something from scratch.</strong> You just need something worth selling to people who already trust you. AI helps you write the sales page, the launch emails, and the pitch.</div>
+            <div class="step-tags">
+              <span class="step-tag">digital products</span>
+              <span class="step-tag">affiliate marketing</span>
+              <span class="step-tag">white label</span>
+              <span class="step-tag">sales pages</span>
+              <span class="step-tag">launch strategy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MODULES ── -->
+  <section class="system-section">
+    <div class="inner-wide">
+      <div class="section-label">// what's inside</div>
+      <h2 class="section-h2">14 modules.<br><em>One complete system.</em></h2>
+      <p class="section-body" style="margin-bottom:2.5rem;">Everything from picking your niche to selling your first digital product. In order. With AI doing the heavy lifting at every step.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;">
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700;margin-bottom:.4rem;">MODULE 01</div>
+          <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);margin-bottom:.4rem;">Intro To Digital Marketing</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">The industry overview and why it's worth learning right now. Sets up everything that follows.</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700;margin-bottom:.4rem;">MODULE 02</div>
+          <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);margin-bottom:.4rem;">White Label Digital License Set Up</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">Your ready-to-sell digital product inventory. Brand it, customize it, sell it as your own.</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700;margin-bottom:.4rem;">MODULE 03</div>
+          <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);margin-bottom:.4rem;">7-Figure Self Mastery</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">The habits, focus, and mental frameworks that keep you in the game long enough to win.</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700;margin-bottom:.4rem;">MODULE 04</div>
+          <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);margin-bottom:.4rem;">Affiliate Marketing</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">Turn traffic into commissions. The same system behind millions in affiliate revenue.</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700;margin-bottom:.4rem;">MODULE 05</div>
+          <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);margin-bottom:.4rem;">Sell Your Own Digital Products</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">How to build and scale your own products to 7 figures. Step by step.</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700;margin-bottom:.4rem;">MODULE 06</div>
+          <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);margin-bottom:.4rem;">7-Figure Group Mastery</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">The group funnel strategy for building a community that converts.</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700;margin-bottom:.4rem;">MODULE 07</div>
+          <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);margin-bottom:.4rem;">Facebook Marketing</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">Where serious buyers still hang out. How to post content that actually converts into leads.</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700;margin-bottom:.4rem;">MODULE 08</div>
+          <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);margin-bottom:.4rem;">Instagram Marketing</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">Reels, hooks, and content frameworks that convert followers into buyers right now.</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700;margin-bottom:.4rem;">MODULE 09</div>
+          <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);margin-bottom:.4rem;">AI Prompt Mastery</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">The single skill that unlocks every AI tool you'll ever use. This one changes how you work.</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700;margin-bottom:.4rem;">MODULE 10</div>
+          <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);margin-bottom:.4rem;">AI Image Generation</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">Professional branded visuals, thumbnails, and product graphics without a designer.</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700;margin-bottom:.4rem;">BONUS</div>
+          <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);margin-bottom:.4rem;">The 7-Figure Swipe Vault</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">Top-performing templates, posts, and conversion strategies. Steal and deploy immediately.</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700;margin-bottom:.4rem;">BONUS</div>
+          <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);margin-bottom:.4rem;">90% DFY Business</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;">How members are making 5, 6, and 7 figures with done-for-you products. Watch this first.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── AI ANGLE ── -->
+  <section class="ai-section">
+    <div class="inner">
+      <div class="section-label">// why ai changes everything</div>
+      <h2 class="section-h2">You don't need a team.<br><em>You need the right tools.</em></h2>
+      <p class="section-body">Every step in this system has an AI layer. Not gimmicks. Not prompts that sound cool but don't do anything. <strong>Actual workflows that replace hours of work with minutes.</strong></p>
+      <div class="ai-grid">
+        <div class="ai-card">
+          <div class="ai-card-label">instead of</div>
+          <div class="ai-card-title">Hiring a copywriter</div>
+          <div class="ai-card-body">AI writes your scripts, captions, hooks, emails, and sales pages in your voice.</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-label">instead of</div>
+          <div class="ai-card-title">Hiring a video editor</div>
+          <div class="ai-card-body">AI tools cut, caption, and repurpose your content across platforms automatically.</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-label">instead of</div>
+          <div class="ai-card-title">Hiring a designer</div>
+          <div class="ai-card-body">AI generates thumbnails, graphics, and brand assets in minutes — not days.</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-label">instead of</div>
+          <div class="ai-card-title">Hiring a strategist</div>
+          <div class="ai-card-body">AI helps you research your niche, analyze competitors, and plan your content calendar.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OBJECTIONS ── -->
+  <section class="objections-section">
+    <div class="inner">
+      <div class="section-label">// honest answers</div>
+      <h2 class="section-h2">The questions<br><em>you're already asking.</em></h2>
+      <div class="objections-list">
+
+        <div class="objection">
+          <div class="objection-q">I'm not techy. I've never built anything online.</div>
+          <div class="objection-a">
+            I'm a software engineer and I still found most of this stuff overwhelming when I started. The difference is I used AI to fill the gaps instead of pretending I knew what I was doing. <strong>You don't need to know how to code, design, or edit video.</strong> You need to know how to ask the right questions — and this course shows you exactly what to ask.
+          </div>
+        </div>
+
+        <div class="objection">
+          <div class="objection-q">I don't have time. I have a job and a family.</div>
+          <div class="objection-a">
+            I have a full-time job and four kids. I built this entire system in <strong>15 hours a week max</strong> — some weeks less. The AI layer exists specifically to compress the time it takes to do things that used to require hours. If you can find 90 minutes a day, you can run this system.
+          </div>
+        </div>
+
+        <div class="objection">
+          <div class="objection-q">I've tried things like this before and they didn't work.</div>
+          <div class="objection-a">
+            Same. Six times, give or take. The reason most of those attempts failed — mine included — is that they relied on willpower and hustle to make up for a broken system. <strong>This system uses AI to do the parts that usually kill momentum.</strong> The writing. The consistency. The research. When those aren't a grind, you actually keep going.
+          </div>
+        </div>
+
+        <div class="objection">
+          <div class="objection-q">$497 is a lot of money.</div>
+          <div class="objection-a">
+            It is. I'm not going to tell you it isn't. Here's the math I ran: <strong>one sale of a $497 course covers the investment.</strong> One. If this system helps you make a single sale — of your own course, your own product, or even an affiliate commission — it's already paid for itself. The question isn't whether $497 is a lot. It's whether you trust the outcome enough to make the bet.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section class="about-section">
+    <div class="inner">
+      <div class="section-label">// who built this</div>
+      <h2 class="section-h2">I'm not a guru.<br><em>I'm proof it works.</em></h2>
+      <div class="about-grid">
+        <div class="about-avatar" id="about-avatar-slot">B</div>
+        <div class="about-body">
+          <p>My name is Brent. I'm 44, bald, heavyset, and a software engineer by day. I have four kids including two teenagers. Money has been tight despite a good salary. I've tried to build online businesses before — and failed at all of them.</p>
+          <p>My wife has watched enough of these attempts that she no longer gets her hopes up. <strong>She's the realist. I'm the dreamer.</strong></p>
+          <p>The difference this time is the AI layer. I'm not grinding harder. I'm working smarter — and documenting every step publicly so you can see exactly what's working, what's not, and how I'm doing it. <strong>This course is the system I'm using in real time.</strong></p>
+          <p>Follow along at <strong>@brentvsai</strong> on TikTok, Instagram, and YouTube.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRICING ── -->
+  <section class="pricing-section">
+    <div class="inner">
+      <div class="section-label">// get access</div>
+      <h2 class="section-h2">One price.<br><em>Everything included.</em></h2>
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <div class="pricing-name">Build It With AI</div>
+          <div class="pricing-tagline">The complete digital business system</div>
+        </div>
+        <div class="pricing-body">
+          <div class="pricing-amount">
+            <span class="price-num">$497</span>
+            <span class="price-label">one-time<br>no subscription</span>
+          </div>
+          <ul class="includes-list">
+            <li>The full niche, content, community, and product system</li>
+            <li>AI workflows for every step — scripts, captions, emails, and more</li>
+            <li>Templates, checklists, and tools you can use immediately</li>
+            <li>Access to all future updates at no extra charge</li>
+            <li>Community access — ask questions, get unstuck, stay accountable</li>
+          </ul>
+          <a class="btn-primary" href="https://www.skool.com/brent-vs-ai-1732" target="_blank" style="width:100%;justify-content:center;">
+            Get instant access →
+          </a>
+          <p class="pricing-note">
+            You'll get immediate access after purchase. No waiting. No upsells. No monthly fees ever.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ── -->
+  <section class="final-cta">
+    <div class="inner">
+      <div class="section-label" style="text-align:center">// last thing</div>
+      <h2 class="section-h2" style="text-align:center">You already know<br><em>you want to build something.</em></h2>
+      <p class="section-body" style="text-align:center;margin:1rem auto 2.5rem;">
+        The only question is whether you do it with a system — or keep figuring it out alone.<br><strong>One sale covers the cost. Everything after that is profit.</strong>
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center;">
+        <a class="btn-primary" href="https://www.skool.com/brent-vs-ai-1732" target="_blank">Get instant access — $497 →</a>
+        <a class="btn-ghost" href="/free">Not ready yet? Join the free community</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <a class="footer-logo" href="/">@brentvsai</a>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/quiz/niche">Free Quiz</a>
+      <a href="/free">Free Community</a>
+    </div>
+  </footer>
+
+  <script>
+    /* ═══════════════════════════════
+       CONFIG — update as needed
+       ═══════════════════════════════ */
+    const CONFIG = {
+      photo: "../assets/profile.png",   // same photo as link page — or null for initials
+      initials: "B",
+    };
+    /* ═══════════════════════════════ */
+
+    // About section avatar
+    const slot = document.getElementById('about-avatar-slot');
+    if (CONFIG.photo) {
+      const img = document.createElement('img');
+      img.src     = CONFIG.photo;
+      img.alt     = 'Brent';
+      img.onerror = () => { slot.textContent = CONFIG.initials; };
+      slot.innerHTML = '';
+      slot.appendChild(img);
+    }
+  </script>
+</body>
+</html>
