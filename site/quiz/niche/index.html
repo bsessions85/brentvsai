@@ -1371,16 +1371,25 @@ function scoreNiches() {
   const tagCounts = {};
   allTags.forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; });
 
-  return NICHES.map(niche => {
+  // Score each niche: sum tag match counts + bonus for breadth of coverage
+  const scored = NICHES.map(niche => {
     let score = 0;
     niche.tags.forEach(t => {
       if (tagCounts[t]) score += tagCounts[t];
     });
-    // Normalise to 0–100
-    const maxPossible = niche.tags.length * 3;
-    const pct = Math.round((score / maxPossible) * 100);
-    return { ...niche, score, pct: Math.min(pct, 100) };
+    // Bonus: reward niches where a high % of their tags were matched at all
+    const matchedCount = niche.tags.filter(t => tagCounts[t]).length;
+    const coverageBonus = matchedCount / niche.tags.length;
+    const combined = score * (0.7 + 0.3 * coverageBonus);
+    return { ...niche, score: combined };
   }).sort((a, b) => b.score - a.score);
+
+  // Normalize: best match = 100%, everything else relative to it
+  const maxScore = scored[0]?.score || 1;
+  return scored.map(niche => ({
+    ...niche,
+    pct: Math.min(100, Math.round((niche.score / maxScore) * 100)),
+  }));
 }
 
 /* ── RENDER RESULTS ── */
