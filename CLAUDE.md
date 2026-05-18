@@ -94,10 +94,9 @@ youtube:   "X",
 ```
 
 ### Push to GitHub
-Network access is restricted in Claude's sandbox — Brent must push from Terminal:
+Claude can push directly. Stage, commit, and push from the repo root:
 ```bash
-cd ~/brentvsai
-git add .
-git commit -m "describe changes"
-git push
+git -C /Users/brentsessions/brentvsai add .
+git -C /Users/brentsessions/brentvsai commit -m "describe changes"
+git -C /Users/brentsessions/brentvsai push
 ```
