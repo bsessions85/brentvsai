@@ -706,7 +706,8 @@
         </p>
         <div class="cta-buttons">
           <a class="btn-primary" href="/free" target="_blank">Join the free community →</a>
-          <a class="btn-secondary" href="https://www.skool.com/brent-vs-ai-1732" target="_blank">See the $497 course</a>
+          <!-- hidden until course is ready -->
+          <!-- <a class="btn-secondary" href="/course">See the $497 course</a> -->
         </div>
       </div>
 
@@ -1282,14 +1283,12 @@ function renderQuestion(idx) {
   document.getElementById('progress-fill').style.width  = pct + '%';
   document.getElementById('progress-count').textContent = (idx + 1) + ' of ' + QUESTIONS.length;
 
-  const selected = answers[q.id] || [];
+  const selected = answers[q.id] || [];   // now an array of selected option indices
 
   const colClass = q.cols === 1 ? 'cols-1' : q.cols === 3 ? 'cols-3' : '';
 
   const optionsHTML = q.options.map((opt, i) => {
-    const isSel = selected.some(t => opt.tags.includes(t)) &&
-      (q.multi ? true : selected[0] !== undefined &&
-        opt.tags.some(t => selected.includes(t)));
+    const isSel = selected.includes(i);
     return `
       <button class="option-btn${isSel ? ' selected' : ''}"
               onclick="selectOption('${q.id}', ${i}, ${q.multi})">
@@ -1319,12 +1318,9 @@ function renderQuestion(idx) {
 }
 
 function selectOption(qId, optIdx, isMulti) {
-  const q   = QUESTIONS.find(q => q.id === qId);
-  const opt = q.options[optIdx];
-
   if (!isMulti) {
-    // single select — store tags, auto-advance
-    answers[qId] = opt.tags;
+    // single select — store index, auto-advance
+    answers[qId] = [optIdx];
     const next = currentQ + 1;
     if (next >= QUESTIONS.length) {
       showResults();
@@ -1333,14 +1329,14 @@ function selectOption(qId, optIdx, isMulti) {
       renderQuestion(currentQ);
     }
   } else {
-    // multi select — toggle
+    // multi select — toggle index
     if (!answers[qId]) answers[qId] = [];
     const existing = answers[qId];
-    const alreadySelected = opt.tags.some(t => existing.includes(t));
+    const alreadySelected = existing.includes(optIdx);
     if (alreadySelected) {
-      answers[qId] = existing.filter(t => !opt.tags.includes(t));
+      answers[qId] = existing.filter(i => i !== optIdx);
     } else {
-      answers[qId] = [...existing, ...opt.tags];
+      answers[qId] = [...existing, optIdx];
     }
     renderQuestion(currentQ);
   }
@@ -1365,8 +1361,13 @@ function goBack() {
 
 /* ── SCORING ── */
 function scoreNiches() {
-  // Flatten all selected tags
-  const allTags = Object.values(answers).flat();
+  // Derive tags from selected option indices
+  const allTags = [];
+  QUESTIONS.forEach(q => {
+    (answers[q.id] || []).forEach(idx => {
+      allTags.push(...q.options[idx].tags);
+    });
+  });
   const tagCounts = {};
   allTags.forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; });
 
