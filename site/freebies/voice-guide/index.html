@@ -724,7 +724,6 @@
       currentStep++;
       document.getElementById('step-' + currentStep).classList.add('active');
       updateProgress(currentStep);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function prevStep() {
@@ -732,7 +731,6 @@
       currentStep--;
       document.getElementById('step-' + currentStep).classList.add('active');
       updateProgress(currentStep);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function resetTool() {
