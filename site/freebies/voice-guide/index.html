@@ -795,7 +795,7 @@ EXTRA CONTEXT: ${data.extra}
 End the guide with this exact line on its own: "Now you have context. Write everything in my voice."`;
 
       try {
-        const response = await fetch('https://api.anthropic.com/v1/messages', {
+        const response = await fetch('/api/claude', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
