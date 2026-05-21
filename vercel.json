@@ -1,3 +1,10 @@
 {
-  "outputDirectory": "site"
+  "builds": [
+    { "src": "site/**", "use": "@vercel/static" },
+    { "src": "api/claude.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/claude", "dest": "/api/claude.js" },
+    { "src": "/(.*)", "dest": "/site/$1" }
+  ]
 }
