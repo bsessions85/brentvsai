@@ -251,10 +251,20 @@
       font-size: 15px;
       color: var(--muted);
       transition: color 0.15s ease, transform 0.15s ease;
+      flex-shrink: 0;
     }
 
     .link-btn:hover .link-arrow { color: var(--text); transform: translateX(2px); }
     .link-btn.primary .link-arrow { color: var(--accent); }
+
+    .link-label-stack { display: flex; flex-direction: column; gap: 2px; }
+    .link-sublabel {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .link-btn.primary .link-sublabel { color: rgba(232, 196, 104, 0.65); }
 
     /* ─────────────────────────────────────────
        STATS
@@ -398,7 +408,7 @@
       initials: "B",
 
       /* Bio — use \n for a line break */
-      bio: "44-year-old software engineer. Dad of 4. Building <strong>$0 to $10K in 90 days</strong> using AI — on camera, in public, for real.\n\nMy wife thinks I'm going to fail. <strong>She's probably right.</strong>",
+      bio: "44-year-old software engineer. Dad of 4. Building <strong>$0 to $10K in 90 days</strong> using AI — on camera, in public, for real.\n\nI made the course I wish existed. It's free. No catch.",
 
       /* Challenge stats — update weekly */
       /* day is calculated automatically from the start date below */
@@ -409,12 +419,14 @@
       },
 
       /* Links — set primary: true on the one you want highlighted */
+      /* sublabel is optional — shows as a smaller line under the main label */
       links: [
         {
-          label:   "Free Community on Skool",
-          icon:    "🎓",
-          url:     "https://www.skool.com/brentvsai",
-          primary: true,
+          label:    "Get the Free Course",
+          sublabel: "Find a niche. Build an audience. Start making money. Free on Skool.",
+          icon:     "🎓",
+          url:      "https://www.skool.com/brentvsai",
+          primary:  true,
         },
         {
           label:   "Find Your Niche — Free Quiz",
@@ -491,7 +503,10 @@
       a.innerHTML = `
         <div class="link-btn-left">
           <div class="link-icon">${link.icon}</div>
-          <span>${link.label}</span>
+          <div class="link-label-stack">
+            <span>${link.label}</span>
+            ${link.sublabel ? `<span class="link-sublabel">${link.sublabel}</span>` : ''}
+          </div>
         </div>
         <span class="link-arrow">→</span>
       `;
